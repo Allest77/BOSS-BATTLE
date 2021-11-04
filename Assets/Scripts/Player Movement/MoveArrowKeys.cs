@@ -15,7 +15,7 @@ public class MoveArrowKeys : MonoBehaviour {
     }
 
     void Update() {
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 movement = new Vector2(Input.GetAxisRaw("BossHorizontal"), Input.GetAxisRaw("BossVertical"));
         
         transform.Translate(movement * speed * Time.deltaTime);
     }
