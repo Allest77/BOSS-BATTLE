@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletHellMovement : MonoBehaviour {
-    public float speed = 4.0f;
-    public GameObject gunner;
+    public float speed = 4.0f, xRange = 10.0f, yRange = 10.0f;
+    public GameObject gunner, focalPoint;
     float movementX, movementY;
     private CharacterController controller;
     private Vector2 playerVelocity;
 
     void Start() {
         gunner = GameObject.Find("Gunner");
+        focalPoint = GameObject.Find("FocalPoint");
         movementX = 0;
         movementY = 0;
     }
 
     //Gunner Controller
     void Update() {
+
+        //left-side boundary
+        if (transform.position.x < -xRange) { 
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+
+        //right side boundary
+        if (transform.position.x > xRange) {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+
+        //Gunner Controller
         Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         
         transform.Translate(movement * speed * Time.deltaTime);
